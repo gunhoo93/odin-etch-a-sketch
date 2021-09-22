@@ -1,0 +1,21 @@
+{
+  "name": "odin-etch-a-sketch",
+  "version": "1.0.0",
+  "description": "The Odin Project Etch-a-Sketch app",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack-dev": "webpack --watch --mode development",
+    "lite-server": "lite-server",
+    "dev": "concurrently 'npm run webpack-dev' 'npm run lite-server'"
+  },
+  "author": "Gunhoo Yoon",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^6.2.1",
+    "html-webpack-plugin": "^5.3.2",
+    "lite-server": "^2.6.1",
+    "webpack": "^5.53.0",
+    "webpack-cli": "^4.8.0"
+  }
+}
