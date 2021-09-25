@@ -25,4 +25,13 @@ describe('Board', () => {
         expect(() => board.paint(0, 1)).toThrow();
 
     });
+
+    test('iterating over a board returns its coordinates', () => {
+        const board = new Board({ rows: 2, columns: 2 });
+        const output = [];
+        for (const coord of board) {
+            output.push(coord);
+        }
+        expect(output).toEqual([[0, 0], [0, 1], [1, 0], [1, 1]]);
+    });
 });
