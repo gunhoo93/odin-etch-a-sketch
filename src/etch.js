@@ -1,7 +1,7 @@
 export class Board {
     constructor({ rows, columns }) {
-        this.width = columns;
-        this.height = rows;
+        this.rows = rows;
+        this.columns = columns;
 
         this.board = [];
         for (let row = 0; row < rows; ++row) {
@@ -23,18 +23,18 @@ export class Board {
     }
 
     [Symbol.iterator]() {
-        const width = this.width;
-        const height = this.height;
+        const rows = this.rows;
+        const columns = this.columns;
 
         return {
             row: 0,
             column: 0,
             next() {
-                if (this.column == width) {
+                if (this.column == columns) {
                     this.column = 0;
                     this.row += 1;
                 }
-                if (this.column < width && this.row < height) {
+                if (this.column < columns && this.row < rows) {
                     return { value: [this.row, this.column++], done: false };
                 }
                 return { value: undefined, done: true };
