@@ -1,12 +1,12 @@
 export class Board {
-    constructor({ width, height }) {
-        this.width = width;
-        this.height = height;
+    constructor({ rows, columns }) {
+        this.width = columns;
+        this.height = rows;
 
         this.board = [];
-        for (let row = 0; row < height; ++row) {
+        for (let row = 0; row < rows; ++row) {
             this.board.push([]);
-            for (let column = 0; column < width; ++column) {
+            for (let column = 0; column < columns; ++column) {
                 this.board[row].push(new Tile());
             }
         }
