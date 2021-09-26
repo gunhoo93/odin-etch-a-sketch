@@ -1,3 +1,5 @@
-import { msg } from './etch';
+import { renderHtmlBoard } from './ui';
+import { Board } from './etch';
 
-console.log(msg);
+const board = new Board({ rows: 16, columns: 16 });
+renderHtmlBoard(document.querySelector('.board-container'), board);
