@@ -1,80 +1,44 @@
-const Pixel = (size) => `${size}px`;
+export function createEtchSketch({ target, rows, columns, colorPicker }) {
+    const board = document.createElement('div');
+    board.className = 'board';
+    board.style['display'] = 'grid';
+    board.style['grid-template-rows'] = `repeat(${rows}, calc(100% / ${rows}))`;
+    board.style['grid-template-columns'] = `repeat(${columns}, calc(100% / ${columns}))`;
 
-export function initializeEtchSketch({ board, colorPicker }) {
-    board.listen('mouseover', (evt) => {
-        board.paint(evt.target, colorPicker.getColor());
+    for (let i = 0; i < rows * columns; ++i) {
+        const tile = document.createElement('div');
+        board.appendChild(tile);
+    }
+
+    function paint(tile, color) {
+        if (tile.style['background-color']) {
+            tile.style['background-color'] = null;
+        }
+        else {
+            tile.style['background-color'] = color;
+        }
+    }
+
+    board.addEventListener('mouseover', (evt) => {
+        paint(evt.target, colorPicker.getColor());
     });
+
+    target.replaceChildren(board);
 }
 
-export class BoardElement {
-    constructor({ target, width, height, board }) {
-        const tiles = [];
-        const tileWidth = width / board.columns;
-        const tileHeight = height / board.rows;
-        for (const [row, column] of board) {
-            const tile = createTileElement({
-                width: tileWidth,
-                height: tileHeight,
-                row: row,
-                column: column
-            });
-            tiles.push(tile);
+export function createColorPicker({ target, colorSchemes = {} }) {
+    let currentScheme = colorSchemes[Object.keys(colorSchemes)[0]];
+
+    target.addEventListener('click', (evt) => {
+        const data = evt.target.dataset;
+        if (data.hasOwnProperty('scheme')) {
+            currentScheme = colorSchemes[data.scheme];
         }
-        target.style.width = Pixel(width);
-        target.style.height = Pixel(height);
+    });
 
-        // Enforces $target to contain a single board.
-        target.replaceChildren(...tiles);
-
-        this.element = target;
-        this.board = board;
-    }
-
-    paint($tile, color) {
-        const { row, column } = $tile.dataset;
-        if (row === undefined || column === undefined) {
-            console.warn('Tile element missing row, column data attribute');
+    return {
+        getColor() {
+            return currentScheme.getColor();
         }
-        this.board.paint(row, column, color);
-        $tile.style['background-color'] = this.board.getTileColor(row, column);
-    }
-
-    listen(evtType, handler) {
-        this.element.addEventListener(evtType, handler);
-    }
-}
-
-export class ColorPickerElement {
-    constructor({ container, colorSchemes = {} }) {
-        this.colorSchemes = colorSchemes;
-        this.currentScheme = colorSchemes[Object.keys(colorSchemes)[0]];
-
-        container.addEventListener('click', (evt) => {
-            const data = evt.target.dataset;
-            console.log(data.scheme, this.colorSchemes[data.scheme], this.colorSchemes);
-            if (data.hasOwnProperty('scheme')) {
-                this.currentScheme = this.colorSchemes[data.scheme];
-            }
-        });
-    }
-
-    getColor() {
-        return this.currentScheme.getColor();
-    }
-}
-
-function createTileElement({ width, height, row, column }) {
-    const elem = document.createElement('div');
-    elem.className = 'tile';
-    elem.dataset.row = row;
-    elem.dataset.column = column;
-    elem.style.width = Pixel(width);
-    elem.style.height = Pixel(height);
-
-    const label = document.createElement('span');
-    label.className = 'visually-hidden';
-    label.textContent = `row ${row + 1} column ${column + 1}`;
-    elem.appendChild(label);
-
-    return elem;
+    };
 }

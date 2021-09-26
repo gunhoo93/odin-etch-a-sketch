@@ -1,10 +1,7 @@
 .board {
-    line-height: 0;
+    width: 960px;
+    height: 960px;
 }
 .board > div {
-    display: inline-block;
     border: 1px solid black;
-}
-.visually-hidden {
-    visibility: hidden;
 }
