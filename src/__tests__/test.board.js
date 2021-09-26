@@ -1,4 +1,4 @@
-import { Board } from '../etch';
+import { Board } from '../board';
 
 describe('Board', () => {
     test('painting a clean tile should paint the tile', () => {
