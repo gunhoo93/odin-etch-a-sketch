@@ -20,9 +20,11 @@
     "@babel/preset-env": "^7.15.6",
     "babel-jest": "^27.2.1",
     "concurrently": "^6.2.1",
+    "css-loader": "^6.3.0",
     "html-webpack-plugin": "^5.3.2",
     "jest": "^27.2.1",
     "lite-server": "^2.6.1",
+    "mini-css-extract-plugin": "^2.3.0",
     "webpack": "^5.53.0",
     "webpack-cli": "^4.8.0"
   }
