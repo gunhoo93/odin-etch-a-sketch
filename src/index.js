@@ -1,6 +1,6 @@
 import './style.css';
 import { BoardElement, ColorPickerElement, initializeEtchSketch } from './ui';
-import { Board } from './etch';
+import { Board } from './board';
 
 initializeEtchSketch({
     board: new BoardElement({
