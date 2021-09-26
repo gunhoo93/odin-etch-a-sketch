@@ -15,6 +15,19 @@ export class DimmingRandomColor {
     }
 }
 
+export class UserPickedColor {
+    constructor(input) {
+        this.color = '#000';
+        input.addEventListener('input', (evt) => {
+            this.color = evt.target.value;
+        });
+    }
+
+    getColor() {
+        return this.color;
+    }
+}
+
 function HSL(h, s, l) {
     return `hsl(${h}, ${s}%, ${l}%)`;
 }

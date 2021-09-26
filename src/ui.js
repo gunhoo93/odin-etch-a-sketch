@@ -2,7 +2,7 @@ const Pixel = (size) => `${size}px`;
 
 export function initializeEtchSketch({ board, colorPicker }) {
     board.listen('mouseover', (evt) => {
-        board.paint(evt.target, colorPicker.color);
+        board.paint(evt.target, colorPicker.getColor());
     });
 }
 
@@ -45,11 +45,21 @@ export class BoardElement {
 }
 
 export class ColorPickerElement {
-    constructor({ target, initialColor = '#000' }) {
-        this.color = initialColor;
-        target.addEventListener('input', (evt) => {
-            this.color = evt.target.value;
+    constructor({ container, colorSchemes = {} }) {
+        this.colorSchemes = colorSchemes;
+        this.currentScheme = colorSchemes[Object.keys(colorSchemes)[0]];
+
+        container.addEventListener('click', (evt) => {
+            const data = evt.target.dataset;
+            console.log(data.scheme, this.colorSchemes[data.scheme], this.colorSchemes);
+            if (data.hasOwnProperty('scheme')) {
+                this.currentScheme = this.colorSchemes[data.scheme];
+            }
         });
+    }
+
+    getColor() {
+        return this.currentScheme.getColor();
     }
 }
 

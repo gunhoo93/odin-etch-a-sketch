@@ -1,6 +1,7 @@
 import './style.css';
 import { BoardElement, ColorPickerElement, initializeEtchSketch } from './ui';
 import { Board } from './board';
+import { DimmingRandomColor, UserPickedColor } from './colors';
 
 initializeEtchSketch({
     board: new BoardElement({
@@ -10,6 +11,10 @@ initializeEtchSketch({
         board: new Board({ rows: 16, columns: 16 })
     }),
     colorPicker: new ColorPickerElement({
-        target: document.querySelector('#color-input')
+        container: document.querySelector('#color-scheme-picker'),
+        colorSchemes: {
+            'user-picked-color': new UserPickedColor(document.querySelector('#color-input')),
+            'random-color': new DimmingRandomColor()
+        }
     })
 });

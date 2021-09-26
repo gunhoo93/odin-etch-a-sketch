@@ -13,10 +13,13 @@
 
 <body>
     <div id="board" class="board"></div>
-    <div class="colors">
+    <div id="color-scheme-picker" class="colors">
         <div>
             <label for="color-input">Pick color</label>
-            <input id="color-input" type="color">
+            <input id="color-input" type="color" data-scheme='user-picked-color'>
+        </div>
+        <div>
+            <button data-scheme='random-color'>Random colors</button>
         </div>
     </div>
 </body>
