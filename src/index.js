@@ -4,8 +4,7 @@ import { DimmingRandomColor, UserPickedColor } from './colors';
 
 createEtchSketch({
     target: document.querySelector('#board-container'),
-    rows: 64,
-    columns: 64,
+    length: 64,
     colorPicker: createColorPicker({
         target: document.querySelector('#color-scheme-picker'),
         colorSchemes: {

@@ -1,11 +1,11 @@
-export function createEtchSketch({ target, rows, columns, colorPicker }) {
+export function createEtchSketch({ target, length, colorPicker }) {
     const board = document.createElement('div');
     board.className = 'board';
     board.style['display'] = 'grid';
-    board.style['grid-template-rows'] = `repeat(${rows}, calc(100% / ${rows}))`;
-    board.style['grid-template-columns'] = `repeat(${columns}, calc(100% / ${columns}))`;
+    board.style['grid-template-rows'] = `repeat(${length}, calc(100% / ${length}))`;
+    board.style['grid-template-columns'] = `repeat(${length}, calc(100% / ${length}))`;
 
-    for (let i = 0; i < rows * columns; ++i) {
+    for (let i = 0; i < length * length; ++i) {
         const tile = document.createElement('div');
         board.appendChild(tile);
     }
