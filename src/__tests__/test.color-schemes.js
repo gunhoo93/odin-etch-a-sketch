@@ -1,8 +1,8 @@
-import { DimmingRandomColor } from "../colors";
+import { DimmingRandomColorScheme } from "../color-schemes";
 
-describe('DimmingRandomColor', () => {
+describe('DimmingRandomColorScheme', () => {
     test('gurantees black on every 10th call', () => {
-        const colorPicker = new DimmingRandomColor();
+        const colorPicker = new DimmingRandomColorScheme();
         repeat(9, () => colorPicker.getColor());
         expect(colorPicker.getColor()).toMatch(/0%\)$/);
 

@@ -12,20 +12,26 @@
 </head>
 
 <body>
-    <div id="board-picker">
-        <div>
-            <button id="random-board">Random board</button>
-        </div>
-    </div>
     <div id="board-container"></div>
     <div id="color-scheme-picker" class="colors">
         <div>
             <label for="color-input">Pick color</label>
-            <input id="color-input" type="color" data-scheme='user-picked-color'>
+            <input id="color-input" type="color" data-color='manual'>
         </div>
         <div>
-            <button data-scheme='random-color'>Random colors</button>
+            <button data-color='random'>Random colors</button>
         </div>
+    </div>
+    <div id='stylus-picker'>
+        <div>
+            <button data-stylus='auto'>Hover erase</button>
+        </div>
+        <div>
+            <button data-stylus='drag'>Drag to erase</button>
+        </div>
+    </div>
+    <div>
+        <input id="board-resizer" type="range" min=16 max=64 step=4 value=16>
     </div>
 </body>
 

@@ -1,15 +1,41 @@
 import './style.css';
-import { createEtchSketch, createColorPicker } from './ui';
-import { DimmingRandomColor, UserPickedColor } from './colors';
+import { Board } from './board';
+import { StylusPicker, AutoEraseStylus, DragToEraseStylus } from './stylus';
+import { ColorSchemePicker, DimmingRandomColorScheme, UserPickedColorScheme } from './color-schemes';
 
-createEtchSketch({
-    target: document.querySelector('#board-container'),
-    length: 64,
-    colorPicker: createColorPicker({
-        target: document.querySelector('#color-scheme-picker'),
-        colorSchemes: {
-            'user-picked-color': new UserPickedColor(document.querySelector('#color-input')),
-            'random-color': new DimmingRandomColor()
-        }
-    })
+const $colorSchemePicker = document.querySelector('#color-scheme-picker');
+const colorSchemePicker = new ColorSchemePicker({
+    'manual': new UserPickedColorScheme(document.querySelector('#color-input')),
+    'random': new DimmingRandomColorScheme()
 });
+$colorSchemePicker.addEventListener('click', (evt) => {
+    const { color } = evt.target.dataset;
+    if (color) {
+        colorSchemePicker.pick(color);
+    }
+});
+
+const $stylusPicker = document.querySelector('#stylus-picker');
+const stylusPicker = new StylusPicker({
+    'auto': new AutoEraseStylus(colorSchemePicker),
+    'drag': new DragToEraseStylus(colorSchemePicker)
+});
+$stylusPicker.addEventListener('click', (evt) => {
+    const { stylus } = evt.target.dataset;
+    if (stylus) {
+        stylusPicker.pick(stylus);
+    }
+});
+
+const $board = document.querySelector('#board-container');
+const board = new Board({
+    target: $board,
+    stylus: stylusPicker
+});
+
+const $boardResizer = document.querySelector('#board-resizer');
+$boardResizer.addEventListener('change', evt => {
+    const length = parseInt(evt.target.value);
+    board.render(length);
+});
+$boardResizer.dispatchEvent(new Event('change'));

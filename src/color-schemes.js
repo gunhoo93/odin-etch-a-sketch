@@ -1,8 +1,27 @@
+export class ColorSchemePicker {
+    constructor(schemes) {
+        this.schemes = schemes;
+        this.scheme = Object.values(schemes)[0];
+    }
+
+    pick(name) {
+        if (this.schemes.hasOwnProperty(name)) {
+            this.scheme = this.schemes[name];
+        } else {
+            console.warn(`ColorScheme "${name}" does not exists`);
+        }
+    }
+
+    getColor() {
+        return this.scheme.getColor();
+    }
+}
+
 /**
  * ColorPicker that generates random color on every request.
  * It gurantees a black color every 10th request.
  */
-export class DimmingRandomColor {
+export class DimmingRandomColorScheme {
     constructor() {
         this.round = 0;
     }
@@ -15,7 +34,7 @@ export class DimmingRandomColor {
     }
 }
 
-export class UserPickedColor {
+export class UserPickedColorScheme {
     constructor(input) {
         this.color = '#000';
         input.addEventListener('input', (evt) => {
