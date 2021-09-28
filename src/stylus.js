@@ -1,15 +1,18 @@
+import { EventHandler } from './utils';
+
 export class StylusPicker {
-    constructor({ board, stylusOptions }) {
+    constructor({ stylusOptions }) {
         this.stylusOptions = stylusOptions;
-        this.board = board;
+
         this.stylus = Object.values(stylusOptions)[0];
-        this.stylus.init(board);
+        this.stylus.init();
     }
 
     pick(name) {
         if (this.stylusOptions.hasOwnProperty(name)) {
+            this.stylus.dispose();
             this.stylus = this.stylusOptions[name];
-            this.stylus.init(this.board);
+            this.stylus.init();
         } else {
             console.warn(`Stylus "${name}" does not exists`);
         }
@@ -20,9 +23,14 @@ export class StylusPicker {
     }
 }
 
-class Stylus {
-    constructor(colorScheme) {
+class Stylus extends EventHandler {
+    constructor({ colorScheme, board }) {
+        super(board);
+
         this.colorScheme = colorScheme;
+        this.register('mouseover', evt => {
+            this.draw(evt.target);
+        });
     }
 
     draw(tile) {
@@ -32,17 +40,11 @@ class Stylus {
     erase(tile) {
         tile.style['background-color'] = null;
     }
-
-    init(board) {
-        board.addEventListener('mouseover', (evt) => {
-            this.draw(evt.target);
-        });
-    }
 }
 
 export class AutoEraseStylus extends Stylus {
-    constructor(colorScheme) {
-        super(colorScheme);
+    constructor({ colorScheme, board }) {
+        super({ colorScheme, board });
     }
 
     draw(tile) {
@@ -55,46 +57,38 @@ export class AutoEraseStylus extends Stylus {
 }
 
 export class DragToEraseStylus extends Stylus {
-    constructor(colorScheme) {
-        super(colorScheme);
+    constructor({ colorScheme, board }) {
+        super({ colorScheme, board });
 
         this.mousedown = false;
+        this.register('mousedown', (evt) => {
+            evt.preventDefault();
+            this.mousedown = true;
+        });
+        this.register('mouseup', () => {
+            this.mousedown = false;
+        });
+        this.register('mouseleave', () => {
+            this.mousedown = false;
+        });
     }
 
     draw(tile) {
         this.mousedown ? this.erase(tile) : super.draw(tile);
     }
-
-    init(board) {
-        super.init(board);
-
-        board.addEventListener('mousedown', (evt) => {
-            evt.preventDefault();
-            this.mousedown = true;
-        });
-        board.addEventListener('mouseup', () => {
-            this.mousedown = false;
-        });
-        board.addEventListener('mouseleave', () => {
-            this.mousedown = false;
-        });
-    }
 }
 
 export class ToggleToEraseStylus extends Stylus {
-    constructor(colorScheme) {
-        super(colorScheme);
+    constructor({ colorScheme, board }) {
+        super({ colorScheme, board });
+
         this.toggleEraser = false;
+        this.register('click', () => {
+            this.toggleEraser = !this.toggleEraser;
+        });
     }
 
     draw(tile) {
         this.toggleEraser ? this.erase(tile) : super.draw(tile);
-    }
-
-    init(board) {
-        super.init(board);
-        board.addEventListener('click', () => {
-            this.toggleEraser = !this.toggleEraser;
-        });
     }
 }

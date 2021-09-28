@@ -15,7 +15,6 @@ $colorSchemePicker.addEventListener('click', (evt) => {
     }
 });
 
-
 const $board = document.querySelector('#board-container');
 const board = new Board({
     target: $board
@@ -23,11 +22,19 @@ const board = new Board({
 
 const $stylusPicker = document.querySelector('#stylus-picker');
 const stylusPicker = new StylusPicker({
-    board: board.board,
     stylusOptions: {
-        'auto': new AutoEraseStylus(colorSchemePicker),
-        'drag': new DragToEraseStylus(colorSchemePicker),
-        'toggle': new ToggleToEraseStylus(colorSchemePicker)
+        'auto': new AutoEraseStylus({
+            board: board.board,
+            colorScheme: colorSchemePicker
+        }),
+        'drag': new DragToEraseStylus({
+            board: board.board,
+            colorScheme: colorSchemePicker
+        }),
+        'toggle': new ToggleToEraseStylus({
+            board: board.board,
+            colorScheme: colorSchemePicker
+        })
     }
 });
 $stylusPicker.addEventListener('click', (evt) => {
