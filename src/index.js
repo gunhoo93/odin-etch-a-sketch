@@ -67,3 +67,6 @@ $board.addEventListener('mousedown', evt => {
         $settings.classList.toggle('is-hidden');
     }
 });
+$board.addEventListener('click', () => {
+    $settings.classList.toggle('is-hidden');
+});
