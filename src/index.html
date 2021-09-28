@@ -15,56 +15,61 @@
     <div class="container">
         <h1>Etch-a-Sketch</h1>
         <div id="board-container"></div>
-        <div id="settings" class="layout-settings settings">
-            <div class="settings-header">
-                <h2>Settings</h2>
-                <p>Right click to toggle settings</p>
-            </div>
-            <div id="color-scheme-picker">
-                <h3>Colors</h3>
-                <div class="layout-setting-row">
-                    <div>
-                        <label for="color-input" class="is-hidden">User selected color</label>
-                        <input id="color-input" type="color" data-color='manual'>
-                    </div>
-                    <div>
-                        <button data-color='random'>Rainbow</button>
-                    </div>
-                </div>
-            </div>
-            <div id='stylus-picker'>
-                <h3>Erase behaviors</h3>
-                <div class="layout-setting-column">
-                    <div>
-                        <input id="stylus-auto" name="stylus" type="radio" data-stylus='auto' checked>
-                        <label for="stylus-auto">Automatically erase dirty tiles</label>
-                    </div>
-                    <div>
-                        <input id="stylus-drag" name="stylus" type="radio" data-stylus='drag'>
-                        <label for="stylus-drag">Press left mouse to erase</label>
-                    </div>
-                    <div>
-                        <input id="stylus-toggle" name="stylus" type="radio" data-stylus="toggle">
-                        <label for="stylus-toggle">Click left mouse to toggle draw/erase</label>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <h3>Board</h3>
-                <div class="layout-setting-column">
-                    <div>
-                        <label for="board-resizer">Size</label>
-                        <input id="board-resizer" type="range" min=16 max=64 step=4 value=16>
-                        <span id="board-size">16x16</span>
-                    </div>
-                    <div>
-                        <label for="toggle-grid-line">Grid line</label>
-                        <input id="toggle-grid-line" type="checkbox">
-                    </div>
-                </div>
-            </div>
-            <button id="board-reset">Reset</button>
+        <div class="instruction">
+            <h2>How to Play?</h2>
+            <p>1. Right click to toggle settings</p>
+            <p>2. Start drawing by moving your mouse over the board</p>
         </div>
+    </div>
+    <div id="settings" class="layout-settings settings">
+        <div class="settings-header">
+            <h2>Settings</h2>
+            <p>Right click to toggle settings</p>
+        </div>
+        <div id="color-scheme-picker">
+            <h3>Colors</h3>
+            <div class="layout-setting-row">
+                <div>
+                    <label for="color-input" class="is-hidden">User selected color</label>
+                    <input id="color-input" type="color" data-color='manual'>
+                </div>
+                <div>
+                    <button data-color='random'>Rainbow</button>
+                </div>
+            </div>
+        </div>
+        <div id='stylus-picker'>
+            <h3>Erase behaviors</h3>
+            <div class="layout-setting-column">
+                <div>
+                    <input id="stylus-auto" name="stylus" type="radio" data-stylus='auto' checked>
+                    <label for="stylus-auto">Automatically erase dirty tiles</label>
+                </div>
+                <div>
+                    <input id="stylus-drag" name="stylus" type="radio" data-stylus='drag'>
+                    <label for="stylus-drag">Press left mouse to erase</label>
+                </div>
+                <div>
+                    <input id="stylus-toggle" name="stylus" type="radio" data-stylus="toggle">
+                    <label for="stylus-toggle">Click left mouse to toggle draw/erase</label>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h3>Board</h3>
+            <div class="layout-setting-column">
+                <div>
+                    <label for="board-resizer">Size</label>
+                    <input id="board-resizer" type="range" min=16 max=64 step=4 value=16>
+                    <span id="board-size">16x16</span>
+                </div>
+                <div>
+                    <label for="toggle-grid-line">Grid line</label>
+                    <input id="toggle-grid-line" type="checkbox">
+                </div>
+            </div>
+        </div>
+        <button id="board-reset">Reset</button>
     </div>
 </body>
 

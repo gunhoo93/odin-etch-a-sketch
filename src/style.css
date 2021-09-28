@@ -17,6 +17,14 @@ inpit[type="radio"] {
     align-items: center;
 }
 
+.instruction {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 8px;
+    font-size: 1.2em;
+}
+
 .board {
     width: 640px;
     height: 640px;
