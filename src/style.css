@@ -2,9 +2,13 @@ body {
     background-color: hsl(0, 0%, 90%);
 }
 
-h3 {
+h2, h3, p {
     margin: 0;
     margin-bottom: 8px;
+}
+
+inpit[type="radio"] {
+    padding: 8px;
 }
 
 .container {
@@ -23,15 +27,25 @@ h3 {
     border: 1px dotted black;
 }
 
-.stylus-settings {
+.layout-settings {
     display: flex;
     flex-direction: column;
+    row-gap: 16px;
+}
+
+.layout-setting-column {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+}
+
+.layout-setting-row {
+    display: flex;
+    column-gap: 8px;
 }
 
 .settings {
     position: absolute;
-    display: flex;
-    flex-direction: column;
     background-color: hsl(0, 0%, 92%);
     border: 1px solid black;
     border-radius: 6px;
@@ -40,14 +54,13 @@ h3 {
     left: 50%;
 }
 
+.settings-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 2px solid black;
+}
+
 .is-hidden {
     display: none;
-}
-
-.settings > div {
-    margin-bottom: 24px;
-}
-
-.color-options > * {
-    margin-right: 16px;
 }

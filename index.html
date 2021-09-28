@@ -15,18 +15,26 @@
     <div class="container">
         <h1>Etch-a-Sketch</h1>
         <div id="board-container"></div>
-        <div id="settings" class="settings">
+        <div id="settings" class="layout-settings settings">
+            <div class="settings-header">
+                <h2>Settings</h2>
+                <p>Right click to toggle settings</p>
+            </div>
             <div id="color-scheme-picker">
                 <h3>Colors</h3>
-                <div class="color-options">
-                    <label for="color-input" class="is-hidden">User selected color</label>
-                    <input id="color-input" type="color" data-color='manual'>
-                    <button data-color='random'>Rainbow</button>
+                <div class="layout-setting-row">
+                    <div>
+                        <label for="color-input" class="is-hidden">User selected color</label>
+                        <input id="color-input" type="color" data-color='manual'>
+                    </div>
+                    <div>
+                        <button data-color='random'>Rainbow</button>
+                    </div>
                 </div>
             </div>
             <div id='stylus-picker'>
-                <h3>Stylus modes</h3>
-                <div class="stylus-settings">
+                <h3>Erase behaviors</h3>
+                <div class="layout-setting-column">
                     <div>
                         <input id="stylus-auto" name="stylus" type="radio" data-stylus='auto' checked>
                         <label for="stylus-auto">Automatically erase dirty tiles</label>
@@ -43,14 +51,16 @@
             </div>
             <div>
                 <h3>Board</h3>
-                <div>
-                    <label for="board-resizer">Size</label>
-                    <input id="board-resizer" type="range" min=16 max=64 step=4 value=16>
-                    <span id="board-size">16x16</span>
-                </div>
-                <div>
-                    <label for="toggle-grid-line">Grid line</label>
-                    <input id="toggle-grid-line" type="checkbox">
+                <div class="layout-setting-column">
+                    <div>
+                        <label for="board-resizer">Size</label>
+                        <input id="board-resizer" type="range" min=16 max=64 step=4 value=16>
+                        <span id="board-size">16x16</span>
+                    </div>
+                    <div>
+                        <label for="toggle-grid-line">Grid line</label>
+                        <input id="toggle-grid-line" type="checkbox">
+                    </div>
                 </div>
             </div>
             <button id="board-reset">Reset</button>
