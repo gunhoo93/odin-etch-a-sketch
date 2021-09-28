@@ -1,11 +1,6 @@
-#board-container {
+.board {
     width: 480px;
     height: 480px;
-}
-
-.board {
-    width: inherit;
-    height: inherit;
 }
 
 .board > div {

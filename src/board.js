@@ -1,12 +1,9 @@
 export class Board {
-    constructor({ target, stylus }) {
+    constructor({ target }) {
         this.target = target;
         this.board = document.createElement('div');
         this.board.className = 'board';
         this.board.style['display'] = 'grid';
-        this.board.addEventListener('mouseover', (evt) => {
-            stylus.draw(evt.target);
-        });
     }
 
     render(length) {
