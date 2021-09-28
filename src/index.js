@@ -56,6 +56,11 @@ const $settings = document.querySelector('#settings');
 $settings.addEventListener('contextmenu', evt => {
     evt.preventDefault();
 });
+$settings.addEventListener('mousedown', evt => {
+    if (evt.button === 2) {
+        $settings.classList.toggle('is-hidden');
+    }
+});
 $board.addEventListener('contextmenu', evt => {
     evt.preventDefault();
 });
@@ -66,7 +71,4 @@ $board.addEventListener('mousedown', evt => {
         $settings.style.top = clientY + 'px';
         $settings.classList.toggle('is-hidden');
     }
-});
-$board.addEventListener('click', () => {
-    $settings.classList.toggle('is-hidden');
 });
