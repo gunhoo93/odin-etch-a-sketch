@@ -16,5 +16,9 @@ export class Board {
         this.board.replaceChildren(...tiles);
         this.target.appendChild(this.board); // appendChild acts like a replace when same element ref is passed
     }
+
+    toggleGrid() {
+        this.board.classList.toggle('show-grid');
+    }
 }
 

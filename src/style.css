@@ -1,5 +1,5 @@
 body {
-    background-color: hsl(0, 0%, 96%);
+    background-color: hsl(0, 0%, 90%);
 }
 
 h3 {
@@ -16,10 +16,11 @@ h3 {
 .board {
     width: 480px;
     height: 480px;
+    background-color: white;
 }
 
-.board > div {
-    border: 1px solid black;
+.board.show-grid > div {
+    border: 1px dotted black;
 }
 
 .stylus-settings {

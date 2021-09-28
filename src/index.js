@@ -62,6 +62,11 @@ $boardReset.addEventListener('click', () => {
     $boardResizer.dispatchEvent(new Event('change'));
 });
 
+const $toggleGridLine = document.querySelector('#toggle-grid-line');
+$toggleGridLine.addEventListener('change', () => {
+    board.toggleGrid();
+});
+
 const $settings = document.querySelector('#settings');
 $settings.addEventListener('contextmenu', evt => {
     evt.preventDefault();

@@ -42,14 +42,18 @@
                 </div>
             </div>
             <div>
-                <h3>Board size</h3>
-                <label for="board-resizer" class="is-hidden">Resize board</label>
-                <span id="board-size">16x16</span>
-                <input id="board-resizer" type="range" min=16 max=64 step=4 value=16>
+                <h3>Board</h3>
+                <div>
+                    <label for="board-resizer">Size</label>
+                    <input id="board-resizer" type="range" min=16 max=64 step=4 value=16>
+                    <span id="board-size">16x16</span>
+                </div>
+                <div>
+                    <label for="toggle-grid-line">Grid line</label>
+                    <input id="toggle-grid-line" type="checkbox">
+                </div>
             </div>
-            <div>
-                <button id="board-reset">Reset</button>
-            </div>
+            <button id="board-reset">Reset</button>
         </div>
     </div>
 </body>
