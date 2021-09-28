@@ -57,6 +57,11 @@ $boardResizer.addEventListener('change', evt => {
 });
 $boardResizer.dispatchEvent(new Event('change'));
 
+const $boardReset = document.querySelector('#board-reset');
+$boardReset.addEventListener('click', () => {
+    $boardResizer.dispatchEvent(new Event('change'));
+});
+
 const $settings = document.querySelector('#settings');
 $settings.addEventListener('contextmenu', evt => {
     evt.preventDefault();
