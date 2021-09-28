@@ -15,6 +15,7 @@ inpit[type="radio"] {
     display: flex;
     flex-direction: column;
     align-items: center;
+    row-gap: 24px;
 }
 
 .instruction {
