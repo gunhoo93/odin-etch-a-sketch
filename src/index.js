@@ -46,6 +46,11 @@ $stylusPicker.addEventListener('click', (evt) => {
 
 
 const $boardResizer = document.querySelector('#board-resizer');
+const $boardSize = document.querySelector('#board-size');
+$boardResizer.addEventListener('input', evt => {
+    const length = evt.target.value;
+    $boardSize.textContent = `${length}x${length}`;
+});
 $boardResizer.addEventListener('change', evt => {
     const length = parseInt(evt.target.value);
     board.render(length);
