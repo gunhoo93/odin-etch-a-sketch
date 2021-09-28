@@ -51,3 +51,13 @@ $boardResizer.addEventListener('change', evt => {
     board.render(length);
 });
 $boardResizer.dispatchEvent(new Event('change'));
+
+const $settings = document.querySelector('#settings');
+$board.addEventListener('contextmenu', evt => {
+    evt.preventDefault();
+});
+$board.addEventListener('mousedown', evt => {
+    if (evt.button === 2) {
+        $settings.classList.toggle('is-hidden');
+    }
+});

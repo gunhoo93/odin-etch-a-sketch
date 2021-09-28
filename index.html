@@ -15,28 +15,30 @@
     <div class="container">
         <h1>Etch-a-Sketch</h1>
         <div id="board-container"></div>
-        <div id="color-scheme-picker" class="colors">
-            <div>
-                <label for="color-input">Pick color</label>
-                <input id="color-input" type="color" data-color='manual'>
+        <div id="settings" class="settings" data-on="true">
+            <div id="color-scheme-picker" class="colors">
+                <div>
+                    <label for="color-input">Pick color</label>
+                    <input id="color-input" type="color" data-color='manual'>
+                </div>
+                <div>
+                    <button data-color='random'>Random colors</button>
+                </div>
+            </div>
+            <div id='stylus-picker'>
+                <div>
+                    <button data-stylus='auto'>Hover erase</button>
+                </div>
+                <div>
+                    <button data-stylus='drag'>Drag to erase</button>
+                </div>
+                <div>
+                    <button data-stylus='toggle'>Click to toggle between draw and erase</button>
+                </div>
             </div>
             <div>
-                <button data-color='random'>Random colors</button>
+                <input id="board-resizer" type="range" min=16 max=64 step=4 value=16>
             </div>
-        </div>
-        <div id='stylus-picker'>
-            <div>
-                <button data-stylus='auto'>Hover erase</button>
-            </div>
-            <div>
-                <button data-stylus='drag'>Drag to erase</button>
-            </div>
-            <div>
-                <button data-stylus='toggle'>Click to toggle between draw and erase</button>
-            </div>
-        </div>
-        <div>
-            <input id="board-resizer" type="range" min=16 max=64 step=4 value=16>
         </div>
     </div>
 </body>

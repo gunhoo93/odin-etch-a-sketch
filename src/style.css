@@ -8,6 +8,10 @@ body {
     align-items: center;
 }
 
+.is-hidden {
+    display: none;
+}
+
 .board {
     width: 480px;
     height: 480px;
