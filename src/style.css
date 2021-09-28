@@ -46,3 +46,7 @@ h3 {
 .settings > div {
     margin-bottom: 24px;
 }
+
+.color-options > * {
+    margin-right: 16px;
+}
