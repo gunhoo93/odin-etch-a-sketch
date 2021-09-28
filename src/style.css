@@ -1,7 +1,13 @@
-.board {
+#board-container {
     width: 960px;
     height: 960px;
 }
+
+.board {
+    width: inherit;
+    height: inherit;
+}
+
 .board > div {
     border: 1px solid black;
 }

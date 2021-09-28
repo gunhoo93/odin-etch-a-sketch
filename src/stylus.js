@@ -46,15 +46,18 @@ export class AutoEraseStylus extends Stylus {
 }
 
 export class DragToEraseStylus extends Stylus {
-    constructor(colorScheme) {
+    constructor(colorScheme, board) {
         super(colorScheme);
 
         this.mousedown = false;
-        // TODO: find better place to put these and make sure to clean if not in use.
-        document.addEventListener('mousedown', (evt) => {
+        board.addEventListener('mousedown', (evt) => {
+            evt.preventDefault();
             this.mousedown = true;
         });
-        document.addEventListener('mouseup', () => {
+        board.addEventListener('mouseup', () => {
+            this.mousedown = false;
+        });
+        board.addEventListener('mouseleave', () => {
             this.mousedown = false;
         });
     }

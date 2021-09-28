@@ -15,10 +15,12 @@ $colorSchemePicker.addEventListener('click', (evt) => {
     }
 });
 
+
+const $board = document.querySelector('#board-container');
 const $stylusPicker = document.querySelector('#stylus-picker');
 const stylusPicker = new StylusPicker({
     'auto': new AutoEraseStylus(colorSchemePicker),
-    'drag': new DragToEraseStylus(colorSchemePicker)
+    'drag': new DragToEraseStylus(colorSchemePicker, $board)
 });
 $stylusPicker.addEventListener('click', (evt) => {
     const { stylus } = evt.target.dataset;
@@ -26,8 +28,6 @@ $stylusPicker.addEventListener('click', (evt) => {
         stylusPicker.pick(stylus);
     }
 });
-
-const $board = document.querySelector('#board-container');
 const board = new Board({
     target: $board,
     stylus: stylusPicker
