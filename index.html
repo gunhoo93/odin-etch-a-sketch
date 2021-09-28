@@ -15,28 +15,35 @@
     <div class="container">
         <h1>Etch-a-Sketch</h1>
         <div id="board-container"></div>
-        <div id="settings" class="settings" data-on="true">
-            <div id="color-scheme-picker" class="colors">
+        <div id="settings" class="settings">
+            <div id="color-scheme-picker">
+                <h3>Colors</h3>
                 <div>
-                    <label for="color-input">Pick color</label>
+                    <label for="color-input">Select</label>
                     <input id="color-input" type="color" data-color='manual'>
-                </div>
-                <div>
-                    <button data-color='random'>Random colors</button>
+                    <button data-color='random'>Rainbow</button>
                 </div>
             </div>
             <div id='stylus-picker'>
-                <div>
-                    <button data-stylus='auto'>Hover erase</button>
-                </div>
-                <div>
-                    <button data-stylus='drag'>Drag to erase</button>
-                </div>
-                <div>
-                    <button data-stylus='toggle'>Click to toggle between draw and erase</button>
+                <h3>Stylus modes</h3>
+                <div class="stylus-settings">
+                    <div>
+                        <input id="stylus-auto" name="stylus" type="radio" data-stylus='auto' checked>
+                        <label for="stylus-auto">Automatically erase dirty tiles</label>
+                    </div>
+                    <div>
+                        <input id="stylus-drag" name="stylus" type="radio" data-stylus='drag'>
+                        <label for="stylus-auto">Press left mouse to erase</label>
+                    </div>
+                    <div>
+                        <input id="stylus-toggle" name="stylus" type="radio" data-stylus="toggle">
+                        <label for="stylus-toggle">Click left mouse to toggle draw/erase</label>
+                    </div>
                 </div>
             </div>
             <div>
+                <h3>Board size</h3>
+                <label for="board-resizer">Resize board</label>
                 <input id="board-resizer" type="range" min=16 max=64 step=4 value=16>
             </div>
         </div>
