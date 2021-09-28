@@ -1,6 +1,6 @@
 import './style.css';
 import { Board } from './board';
-import { StylusPicker, AutoEraseStylus, DragToEraseStylus } from './stylus';
+import { StylusPicker, AutoEraseStylus, DragToEraseStylus, ArtistStylus } from './stylus';
 import { ColorSchemePicker, DimmingRandomColorScheme, UserPickedColorScheme } from './color-schemes';
 
 const $colorSchemePicker = document.querySelector('#color-scheme-picker');
@@ -20,7 +20,8 @@ const $board = document.querySelector('#board-container');
 const $stylusPicker = document.querySelector('#stylus-picker');
 const stylusPicker = new StylusPicker({
     'auto': new AutoEraseStylus(colorSchemePicker),
-    'drag': new DragToEraseStylus(colorSchemePicker, $board)
+    'drag': new DragToEraseStylus(colorSchemePicker, $board),
+    'artist': new ArtistStylus(colorSchemePicker, $board)
 });
 $stylusPicker.addEventListener('click', (evt) => {
     const { stylus } = evt.target.dataset;
