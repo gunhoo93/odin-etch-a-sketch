@@ -67,50 +67,17 @@ export class DragToEraseStylus extends Stylus {
     }
 }
 
-export class ArtistStylus extends Stylus {
+export class ToggleToEraseStylus extends Stylus {
     constructor(colorScheme, board) {
         super(colorScheme);
+        this.toggleEraser = false;
 
-        this.modes = CycleArray(['draw', 'erase', 'inactive']);
-        board.addEventListener('wheel', (evt) => {
-            evt.preventDefault();
-            evt.deltaY < 0 ? this.modes.next() : this.modes.prev();
-            console.log(this.modes.current());
+        board.addEventListener('click', () => {
+            this.toggleEraser = !this.toggleEraser;
         });
     }
 
     draw(tile) {
-        switch (this.modes.current()) {
-            case 'draw':
-                super.draw(tile);
-                break;
-            case 'erase':
-                super.erase(tile);
-                break;
-            case 'neutral':
-                return;
-        }
+        this.toggleEraser ? this.erase(tile) : super.draw(tile);
     }
-}
-
-function CycleArray(array) {
-    let i = 0;
-
-    return {
-        next() {
-            i += 1;
-            if (i === array.length) {
-                i = 0;
-            }
-        },
-        prev() {
-            i -= 1;
-            if (i < 0) {
-                i = array.length - 1;
-            }
-        },
-        current() {
-            return array[i];
-        }
-    };
 }
