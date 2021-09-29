@@ -2,7 +2,7 @@ import './style.css';
 import { Board } from './board';
 import { StylusPicker, AutoEraseStylus, DragToEraseStylus, ToggleToEraseStylus } from './stylus';
 import { ColorSchemePicker, DimmingRandomColorScheme, UserPickedColorScheme } from './color-schemes';
-import { handleBoardResize } from './settings';
+import { handleBoardSetting, handleSettingsToggle } from './settings';
 
 const $colorSchemePicker = document.querySelector('#color-scheme-picker');
 const colorSchemePicker = new ColorSchemePicker({
@@ -47,40 +47,14 @@ $stylusPicker.addEventListener('click', (evt) => {
     }
 });
 
-handleBoardResize(board, {
+handleBoardSetting(board, {
     input: document.querySelector('#board-resizer'),
-    label: document.querySelector('#board-size')
+    sizeDisplay: document.querySelector('#board-size'),
+    reset: document.querySelector('#board-reset'),
+    showLines: document.querySelector('#toggle-grid-line')
 });
 
-const $boardReset = document.querySelector('#board-reset');
-$boardReset.addEventListener('click', () => {
-    board.reset();
-});
-
-const $toggleGridLine = document.querySelector('#toggle-grid-line');
-$toggleGridLine.addEventListener('change', () => {
-    board.toggleGrid();
-});
-
-const onRightClick = (target, fn) => {
-    target.addEventListener('contextmenu', evt => {
-        evt.preventDefault();
-    });
-    target.addEventListener('mousedown', evt => {
-        if (evt.button === 2) {
-            fn(evt);
-        }
-    });
-};
-
-const $settings = document.querySelector('#settings');
-onRightClick($settings, () => {
-    $settings.classList.toggle('is-hidden');
-});
-
-onRightClick($board, (evt) => {
-    const { clientX, clientY } = evt;
-    $settings.style.left = clientX + 'px';
-    $settings.style.top = clientY + 'px';
-    $settings.classList.toggle('is-hidden');
+handleSettingsToggle({
+    settings: document.querySelector('#settings'),
+    board: $board
 });
