@@ -44,7 +44,18 @@ $stylusPicker.addEventListener('click', (evt) => {
     }
 });
 
-
+/**
+ * Settings scope
+ *  Colors
+ *  EraseBehavior
+ *  Board size
+ *  Grid line toggle
+ *  Board reset
+ * 
+ * Setting interaction
+ *  Open/Close on setting click (sending open/close signal to settings will make it visible/hidden)
+ *  Open/Close on board click
+ */
 const $boardResizer = document.querySelector('#board-resizer');
 const $boardSize = document.querySelector('#board-size');
 $boardResizer.addEventListener('input', evt => {
@@ -67,23 +78,25 @@ $toggleGridLine.addEventListener('change', () => {
     board.toggleGrid();
 });
 
+const onRightClick = (target, fn) => {
+    target.addEventListener('contextmenu', evt => {
+        evt.preventDefault();
+    });
+    target.addEventListener('mousedown', evt => {
+        if (evt.button === 2) {
+            fn(evt);
+        }
+    });
+};
+
 const $settings = document.querySelector('#settings');
-$settings.addEventListener('contextmenu', evt => {
-    evt.preventDefault();
+onRightClick($settings, () => {
+    $settings.classList.toggle('is-hidden');
 });
-$settings.addEventListener('mousedown', evt => {
-    if (evt.button === 2) {
-        $settings.classList.toggle('is-hidden');
-    }
-});
-$board.addEventListener('contextmenu', evt => {
-    evt.preventDefault();
-});
-$board.addEventListener('mousedown', evt => {
-    if (evt.button === 2) {
-        const { clientX, clientY } = evt;
-        $settings.style.left = clientX + 'px';
-        $settings.style.top = clientY + 'px';
-        $settings.classList.toggle('is-hidden');
-    }
+
+onRightClick($board, (evt) => {
+    const { clientX, clientY } = evt;
+    $settings.style.left = clientX + 'px';
+    $settings.style.top = clientY + 'px';
+    $settings.classList.toggle('is-hidden');
 });
