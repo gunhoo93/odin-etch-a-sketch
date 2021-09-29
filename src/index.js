@@ -2,6 +2,7 @@ import './style.css';
 import { Board } from './board';
 import { StylusPicker, AutoEraseStylus, DragToEraseStylus, ToggleToEraseStylus } from './stylus';
 import { ColorSchemePicker, DimmingRandomColorScheme, UserPickedColorScheme } from './color-schemes';
+import { handleBoardResize } from './settings';
 
 const $colorSchemePicker = document.querySelector('#color-scheme-picker');
 const colorSchemePicker = new ColorSchemePicker({
@@ -46,15 +47,9 @@ $stylusPicker.addEventListener('click', (evt) => {
     }
 });
 
-const $boardResizer = document.querySelector('#board-resizer');
-const $boardSize = document.querySelector('#board-size');
-$boardResizer.addEventListener('input', evt => {
-    const length = evt.target.value;
-    $boardSize.textContent = `${length}x${length}`;
-});
-$boardResizer.addEventListener('change', evt => {
-    const length = evt.target.value;
-    board.resize(length);
+handleBoardResize(board, {
+    input: document.querySelector('#board-resizer'),
+    label: document.querySelector('#board-size')
 });
 
 const $boardReset = document.querySelector('#board-reset');
