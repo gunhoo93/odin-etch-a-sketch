@@ -6,6 +6,7 @@ export class Board {
         this.target = target;
         this.length = length;
         this.board = document.createElement('div');
+        this.gridMode = false;
         this._build();
     }
 
@@ -19,6 +20,8 @@ export class Board {
         board.style['display'] = 'grid';
         board.style['grid-template-rows'] = `repeat(${length}, calc(100% / ${length}))`;
         board.style['grid-template-columns'] = `repeat(${length}, calc(100% / ${length}))`;
+
+        this.gridMode ? this.showLines() : this.hideLines();
         board.replaceChildren(...tiles);
     }
 
@@ -38,10 +41,12 @@ export class Board {
     }
 
     showLines() {
+        this.gridMode = true;
         this.board.classList.add('show-grid');
     }
 
     hideLines() {
+        this.gridMode = false;
         this.board.classList.remove('show-grid');
     }
 }

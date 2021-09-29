@@ -11,7 +11,6 @@ export function handleBoardSetting(board, { resize, sizeDisplay, reset, showLine
 
     reset.addEventListener('click', () => {
         board.reset();
-        showLines.checked = false;
     });
 
     showLines.addEventListener('change', (evt) => {
