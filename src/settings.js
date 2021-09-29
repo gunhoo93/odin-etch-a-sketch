@@ -20,17 +20,17 @@ export function handleBoardSetting(board, { resize, sizeDisplay, reset, showLine
 }
 
 export function handleSettingsToggle({ settings, board }) {
-    [settings, board].forEach(elem => {
-        onRightClick(elem, () => {
-            settings.classList.add('is-hidden'); // classList.add won't add duplicate
-        });
+    // Close
+    onRightClick(settings, () => {
+        settings.classList.add('is-hidden'); // classList.add won't add duplicate
     });
 
+    // Toggle
     onRightClick(board, (evt) => {
         const { clientX, clientY } = evt;
         settings.style.left = clientX + 'px';
         settings.style.top = clientY + 'px';
-        settings.classList.remove('is-hidden');
+        settings.classList.toggle('is-hidden');
     });
 }
 
