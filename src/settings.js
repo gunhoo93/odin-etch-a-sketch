@@ -1,10 +1,10 @@
-export function handleBoardSetting(board, { input, sizeDisplay, reset, showLines }) {
-    input.addEventListener('input', evt => {
+export function handleBoardSetting(board, { resize, sizeDisplay, reset, showLines }) {
+    resize.addEventListener('input', evt => {
         const length = evt.target.value;
         sizeDisplay.textContent = `${length}x${length}`;
     });
     // Only draw upon receiving final input
-    input.addEventListener('change', evt => {
+    resize.addEventListener('change', evt => {
         const length = evt.target.value;
         board.resize(length);
     });

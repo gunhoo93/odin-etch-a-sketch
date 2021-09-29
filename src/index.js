@@ -48,7 +48,7 @@ $stylusPicker.addEventListener('click', (evt) => {
 });
 
 handleBoardSetting(board, {
-    input: document.querySelector('#board-resizer'),
+    resize: document.querySelector('#board-resizer'),
     sizeDisplay: document.querySelector('#board-size'),
     reset: document.querySelector('#board-reset'),
     showLines: document.querySelector('#toggle-grid-line')
