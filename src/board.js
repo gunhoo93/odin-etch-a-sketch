@@ -28,6 +28,11 @@ export class Board {
         this.render();
     }
 
+    reset() {
+        this._build();
+        this.render();
+    }
+
     render() {
         this.target.appendChild(this.board); // appendChild acts like a replace when same element ref is passed
     }

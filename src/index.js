@@ -59,7 +59,7 @@ $boardResizer.addEventListener('change', evt => {
 
 const $boardReset = document.querySelector('#board-reset');
 $boardReset.addEventListener('click', () => {
-    $boardResizer.dispatchEvent(new Event('change'));
+    board.reset();
 });
 
 const $toggleGridLine = document.querySelector('#toggle-grid-line');
