@@ -17,8 +17,10 @@ $colorSchemePicker.addEventListener('click', (evt) => {
 
 const $board = document.querySelector('#board-container');
 const board = new Board({
-    target: $board
+    target: $board,
+    length: 16
 });
+board.render();
 
 const $stylusPicker = document.querySelector('#stylus-picker');
 const stylusPicker = new StylusPicker({
@@ -44,18 +46,6 @@ $stylusPicker.addEventListener('click', (evt) => {
     }
 });
 
-/**
- * Settings scope
- *  Colors
- *  EraseBehavior
- *  Board size
- *  Grid line toggle
- *  Board reset
- * 
- * Setting interaction
- *  Open/Close on setting click (sending open/close signal to settings will make it visible/hidden)
- *  Open/Close on board click
- */
 const $boardResizer = document.querySelector('#board-resizer');
 const $boardSize = document.querySelector('#board-size');
 $boardResizer.addEventListener('input', evt => {
@@ -63,10 +53,9 @@ $boardResizer.addEventListener('input', evt => {
     $boardSize.textContent = `${length}x${length}`;
 });
 $boardResizer.addEventListener('change', evt => {
-    const length = parseInt(evt.target.value);
-    board.render(length);
+    const length = evt.target.value;
+    board.resize(length);
 });
-$boardResizer.dispatchEvent(new Event('change'));
 
 const $boardReset = document.querySelector('#board-reset');
 $boardReset.addEventListener('click', () => {
