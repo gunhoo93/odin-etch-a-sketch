@@ -3,27 +3,56 @@
 var __webpack_exports__ = {};
 
 ;// CONCATENATED MODULE: ./src/board.js
+/**
+ * Manages reference to a board element
+ */
 class Board {
-    constructor({ target }) {
+    constructor({ target, length }) {
         this.target = target;
+        this.length = length;
         this.board = document.createElement('div');
-        this.board.className = 'board';
-        this.board.style['display'] = 'grid';
+        this.gridMode = false;
+        this._build();
     }
 
-    render(length) {
+    _build() {
+        const { length, board } = this;
         const tiles = [];
         for (let i = 0; i < length * length; ++i) {
             tiles.push(document.createElement('div'));
         }
-        this.board.style['grid-template-rows'] = `repeat(${length}, calc(100% / ${length}))`;
-        this.board.style['grid-template-columns'] = `repeat(${length}, calc(100% / ${length}))`;
-        this.board.replaceChildren(...tiles);
+        board.className = 'board';
+        board.style['display'] = 'grid';
+        board.style['grid-template-rows'] = `repeat(${length}, calc(100% / ${length}))`;
+        board.style['grid-template-columns'] = `repeat(${length}, calc(100% / ${length}))`;
+
+        this.gridMode ? this.showLines() : this.hideLines();
+        board.replaceChildren(...tiles);
+    }
+
+    resize(length) {
+        this.length = parseInt(length);
+        this._build();
+        this.render();
+    }
+
+    reset() {
+        this._build();
+        this.render();
+    }
+
+    render() {
         this.target.appendChild(this.board); // appendChild acts like a replace when same element ref is passed
     }
 
-    toggleGrid() {
-        this.board.classList.toggle('show-grid');
+    showLines() {
+        this.gridMode = true;
+        this.board.classList.add('show-grid');
+    }
+
+    hideLines() {
+        this.gridMode = false;
+        this.board.classList.remove('show-grid');
     }
 }
 
@@ -200,7 +229,54 @@ class UserPickedColorScheme {
 function HSL(h, s, l) {
     return `hsl(${h}, ${s}%, ${l}%)`;
 }
+;// CONCATENATED MODULE: ./src/settings.js
+function handleBoardSetting(board, { resize, sizeDisplay, reset, showLines }) {
+    resize.addEventListener('input', evt => {
+        const length = evt.target.value;
+        sizeDisplay.textContent = `${length}x${length}`;
+    });
+    // Only draw upon receiving final input
+    resize.addEventListener('change', evt => {
+        const length = evt.target.value;
+        board.resize(length);
+    });
+
+    reset.addEventListener('click', () => {
+        board.reset();
+    });
+
+    showLines.addEventListener('change', (evt) => {
+        evt.target.checked ? board.showLines() : board.hideLines();
+    });
+}
+
+function handleSettingsToggle({ settings, board }) {
+    // Close
+    onRightClick(settings, () => {
+        settings.classList.add('is-hidden'); // classList.add won't add duplicate
+    });
+
+    // Toggle
+    onRightClick(board, (evt) => {
+        const { clientX, clientY } = evt;
+        settings.style.left = clientX + 'px';
+        settings.style.top = clientY + 'px';
+        settings.classList.toggle('is-hidden');
+    });
+}
+
+const onRightClick = (target, fn) => {
+    target.addEventListener('contextmenu', evt => {
+        evt.preventDefault();
+    });
+    target.addEventListener('mousedown', evt => {
+        if (evt.button === 2) {
+            fn(evt);
+        }
+    });
+};
 ;// CONCATENATED MODULE: ./src/index.js
+
 
 
 
@@ -220,8 +296,10 @@ $colorSchemePicker.addEventListener('click', (evt) => {
 
 const $board = document.querySelector('#board-container');
 const board = new Board({
-    target: $board
+    target: $board,
+    length: 16
 });
+board.render();
 
 const $stylusPicker = document.querySelector('#stylus-picker');
 const stylusPicker = new StylusPicker({
@@ -247,48 +325,16 @@ $stylusPicker.addEventListener('click', (evt) => {
     }
 });
 
-
-const $boardResizer = document.querySelector('#board-resizer');
-const $boardSize = document.querySelector('#board-size');
-$boardResizer.addEventListener('input', evt => {
-    const length = evt.target.value;
-    $boardSize.textContent = `${length}x${length}`;
-});
-$boardResizer.addEventListener('change', evt => {
-    const length = parseInt(evt.target.value);
-    board.render(length);
-});
-$boardResizer.dispatchEvent(new Event('change'));
-
-const $boardReset = document.querySelector('#board-reset');
-$boardReset.addEventListener('click', () => {
-    $boardResizer.dispatchEvent(new Event('change'));
+handleBoardSetting(board, {
+    resize: document.querySelector('#board-resizer'),
+    sizeDisplay: document.querySelector('#board-size'),
+    reset: document.querySelector('#board-reset'),
+    showLines: document.querySelector('#toggle-grid-line')
 });
 
-const $toggleGridLine = document.querySelector('#toggle-grid-line');
-$toggleGridLine.addEventListener('change', () => {
-    board.toggleGrid();
-});
-
-const $settings = document.querySelector('#settings');
-$settings.addEventListener('contextmenu', evt => {
-    evt.preventDefault();
-});
-$settings.addEventListener('mousedown', evt => {
-    if (evt.button === 2) {
-        $settings.classList.toggle('is-hidden');
-    }
-});
-$board.addEventListener('contextmenu', evt => {
-    evt.preventDefault();
-});
-$board.addEventListener('mousedown', evt => {
-    if (evt.button === 2) {
-        const { clientX, clientY } = evt;
-        $settings.style.left = clientX + 'px';
-        $settings.style.top = clientY + 'px';
-        $settings.classList.toggle('is-hidden');
-    }
+handleSettingsToggle({
+    settings: document.querySelector('#settings'),
+    board: $board
 });
 /******/ })()
 ;
